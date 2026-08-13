@@ -974,6 +974,27 @@ let knownSet = new Set();
 let reviewSet = new Set();
 let reviewOnlyMode = false;
 
+const PROGRESS_KEY = 'codigo10_progress';
+
+function saveProgress(){
+  try{
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify({
+      known: Array.from(knownSet),
+      review: Array.from(reviewSet)
+    }));
+  } catch(e){ console.error('Erro ao salvar progresso:', e); }
+}
+
+function loadProgress(){
+  try{
+    const raw = localStorage.getItem(PROGRESS_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(Array.isArray(data.known)) knownSet = new Set(data.known);
+    if(Array.isArray(data.review)) reviewSet = new Set(data.review);
+  } catch(e){ console.error('Erro ao carregar progresso:', e); }
+}
+
 // Quiz state
 let quizDeck = [];
 let quizPos = 0;
@@ -1120,6 +1141,7 @@ function markKnow(){
   knownSet.add(k);
   reviewSet.delete(k);
   updateReviewToggleUI();
+  saveProgress();
   if(reviewOnlyMode){
     deck.splice(pos, 1);
     flipped = false;
@@ -1134,6 +1156,7 @@ function markReview(){
   reviewSet.add(k);
   knownSet.delete(k);
   updateReviewToggleUI();
+  saveProgress();
   nextCard();
 }
 
@@ -1152,9 +1175,11 @@ document.getElementById('shuffleBtn').onclick = () => {
   pos = 0; flipped = false; renderCard();
 };
 document.getElementById('resetBtn').onclick = () => {
+  if(!confirm('Isso vai apagar todo o progresso salvo (Sei/Revisar) nos cartões. Continuar?')) return;
   knownSet.clear(); reviewSet.clear();
   reviewOnlyMode = false;
   updateReviewToggleUI();
+  saveProgress();
   deck = refreshDeck(currentCategory);
   pos = 0; flipped = false; renderCard();
 };
@@ -1336,6 +1361,7 @@ function resolveAnswer(item, index){
     feedback.className = 'quiz-feedback wrong';
   }
   updateReviewToggleUI();
+  saveProgress();
   document.getElementById('quizNextBtn').style.display = 'block';
   updateQuizStats();
 }
@@ -1525,6 +1551,7 @@ document.addEventListener('keydown', (e) => {
 
 /* ---------------- INIT ---------------- */
 
+loadProgress();
 deck = refreshDeck(currentCategory);
 renderChannels();
 updateReviewToggleUI();
