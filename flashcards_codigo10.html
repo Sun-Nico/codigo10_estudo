@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Central de Despacho — Estudo Código 10</title>
+<link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACa0lEQVR4nIWTzYtUVxDFf3Xv66/pftMjOjDqGIhpI0GJImIWJuJKmYG4iS6iG3ERyMZZhWBIXLnzH3AbcOPOD1BEFAKSAUnMTiVOEAMqMYL0vJme7n5973HxenoQjCmoxS3uOdSpOmUAY2k6a47zwCcUYbwrDIXlPpb4h0m98l326vV1G0vTGXNcw8wj6T/BAoVIc8+0us/a1n3eDkmj+qXVm43HmLUQwQzvhvAQ17DOG2Gpy9a5A7R+OET258tw/+uLvvuiveDAWggBvtuHxSVjcdmQhl0bREGnb7idH+Crnsb2SV/dPC7lsZUUzWFR0NooWpsCeW7ce+zoDWAwgGoZZvYJXb3FE2d0/nhK+/4z842yrN5MBSDBz3M9Du4JbBiD7d/W+Ou5MTkBl892mZqAmuVc+cX45kKZRrOMAOrNVPVmqon1qSrVcc0drSnc9Nr2YUMwrjMnatKvThsmUx0/VJd+8/psd0Oulipdl8qNhizo5VBOwDnwrtC/Y0uk+6+RrcDfLyH0xMdTkTgwHDAiMIBgLK0UG3idFYNc7kFSgd6KESJ4D9nKaLNrBHmELz4dsH9nxNfEVwcGbN0kLt1NSMbFjyf6fH8sp/2PY/6Ro1oVUUMCM+jncOrwgI+mI7fnE04ezvl8V+DO755T5yrM7A2UEpj9qcKrRaPkC9lWb6ZxVUGnB4oGThCMUllUS5B1DIbGciVRrxTeAEZrFGDO3jayVKR3ww/D2ioYMAdawDAgREGMa7nqxjB8hzgChwKjBadopxEBMz9k/b9QcXgERTvtOll2Q5EjSA/W7u494ELbA0WOdLLsxhsJqx1VhVWD5QAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFRElEQVR4nMWXW4hVZRTHf+v79j7nzLk4zsVsnKzGNCsyki6Q3exC0sXuQRT4IERXCESDoCB66KEoohepHnoqooKynrKEIqHoLkpiYcIgjpfRmTPn7Jlz2d+3etjnjB7PGTUc6w8b9vVb/7XWf61vLyGBAXwul5uPNesQ7gaWAsLsQIFdKJ/j/BtRFB1o2pTmSXbOnNtE9F0ROVdVZ8kuiBEwklDwiqoOq8pjkxMTm0meQK47d4uI/VpRUFyD1Gl7L0aIyzV8PUaM0aCQ9iJiAVTdrVEx2iL5fH6eGvkdYQDwgD1dwwAiQlyu0rdyMb3XDRH9dYiRT7cj1jixxuB1RLxeHqiR9WJkgaq6WTNuDfXiFOc/sYKlL60CI4g19F2/iB3rNlkx4sTIAoX1BvQhRZXZEpwIbrJG4ZKzWbzhJuKoRn00onqgxODDyxm4bxlxqSoYUdCHDCJDKE0xnjaMAeqO7LlzsdkUvhojKYsoqPPkl8xDvUs0JjJkSPTZvpBAYMGaZNHmcQLHCQx4Dy4MGds2Qm3/BOmeLnzNIZkA9crhrX9jwpAk6GhHtYtAVIXiuDBRFkpTUJqE0hT4DnRFwHkolgRU6e+3BGMT/PDU54zuKZHpywKw66UvOfzNboJ8Ck0WEsl1F/T4xeoxXHGB5/pljosHlfP6FTHgHDy5McWeg0K64UTz/UwKnnugzuqrHQt7PFFs+HlHnY3f9/ET5xCOjjG+Yz9BIdP0HoCgU+irFeH5B2LuerAGkcBUI1Ex5NIpvDbCJklEQgufPV9h5XUO6lArCnPnOgbvDLjz2iPc/8I4X2xL092fIa63hrBjVsXC8Kjw41bLO++H7B02uKpQKUtLCqyByUh4dnXMyhUOVxY+2hwytDbLvS9nGB9Rgi7L2xss8+ZbqlVFjkt4GwHnIZtRXvwg5IZ1XTz+Vpr944JN0fqxQOwgm1UevTHGVwStwyufBOwrwqbvArb8ZlFVBuY7bl/uqEwJ9mQEmpiqQRhAvqCElrZaMQLVOpx/ljJ0lscoHCkKB8YNhRyYAP7YaxCjqChXLfHTxI9Fmwamw5sIGudbNNOC2EH/HCWTSa7LlYQUJNooTiabkKgw0OPBtK81YwROdT8MLNNeeW0tU++PnoczNPkZCQhJzo8XTfOeCIhJvPZx8iwVNgg1qiSTOspmYko6ejUjAeeT+q7HrWGrO4gb91MW9h4WjpQEBXpzkM8k1hUY6GmyVv7cJ+DbHepIQBVyGejvVvrn6LRXAD05pa9b6c4q6RD2jRq+32WQAHIFZeWljtKYkOlSblrmcHWBqvDVNosJW9MC0NYJAwsTJeHVtVXW3hMTTwg9OcXahFgxEjQNO3cb7ng5zWRFuOYix7evVjAhjB4U3vsq4LJFnlVXOigoH34R8sjrKfLZdgIdq0A99BWg92wPmUbCGxt2b9ZDFgbHJOkZXcrWnYY1r6V488ka/YOeDc9UoSZQFj7bHPD02ykyqc7V1HEviGO4cNCzYJ6iLqn5Zuq8JomLpoRfdycZNAZKUdITbl7uWNirTNaEX3Ybvt1uCIMksqdEoEmiUoO4Lm2NYxpGyaWPXloDlTrUKseoPVDyXY2ozlDXHQlAw+sT/CMpHQQlrd81G9mJEDCd3VZ45dS7UZOUgvt333T+IfkPIQbVPSR95CTBmlV4BEV1jwH5WJKszd44dHJoYlM+PmODyQmQTF7KiHi93JTL5UOIXyMigmAbL5yJaCjgEGxiy68pl8uHDGCiYrTFe1ahDDdmtzMhTBERizLsPauiYrSF5nDK/zie/wPiMEz5b202cgAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<meta name="theme-color" content="#0b0f0d">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+  :root{
+    --bg: #0b0f0d;
+    --panel: #101712;
+    --panel-2: #141d17;
+    --amber: #ffb703;
+    --amber-dim: #8a6110;
+    --green: #4ade80;
+    --green-dim: #1f4d33;
+    --text: #d9e6dc;
+    --text-dim: #6b8577;
+    --line: #22302a;
+    --danger: #ef4444;
+    --danger-dim: #3d1f1f;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(74,222,128,0.06), transparent),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    padding: 22px 16px 40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .wrap{ width:100%; max-width: 640px; transition: max-width .2s; }
+  .wrap.ref-wide{ max-width: 1040px; }
+
+  .console-header{
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    position: relative;
+    overflow:hidden;
+  }
+  .console-header::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0; width:4px;
+    background: var(--green);
+    box-shadow: 0 0 12px var(--green);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.5} 50%{opacity:1} }
+
+  .title-block{ display:flex; flex-direction:column; gap:2px; }
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--green); font-weight: 700;
+  }
+  h1{ margin:0; font-size: 19px; letter-spacing: 0.5px; color: var(--text); }
+  .clock{ font-size: 11px; color: var(--text-dim); text-align:right; line-height:1.5; }
+  .clock b{ color: var(--amber); }
+
+  .mode-toggle{
+    display:flex; gap: 6px; margin-bottom: 14px;
+  }
+  .mode-btn{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 11px 6px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    border-radius: 8px;
+    cursor:pointer;
+    transition: all .15s;
+  }
+  .mode-btn:hover{ color: var(--text); }
+  .mode-btn.active{
+    background: var(--green-dim);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .channels{
+    display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 16px;
+  }
+  .ch-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 7px 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    border-radius: 6px;
+    cursor:pointer;
+    transition: all .15s;
+    letter-spacing: 0.3px;
+  }
+  .ch-btn:hover{ border-color: var(--amber-dim); color: var(--text); }
+  .ch-btn.active{
+    background: var(--green-dim);
+    border-color: var(--green);
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .stats{
+    display:flex; justify-content: space-between;
+    font-size: 11px; color: var(--text-dim);
+    margin-bottom: 10px; padding: 0 2px;
+  }
+  .stats span b{ color: var(--text); }
+  .stats .known{ color: var(--green); }
+  .stats .review{ color: var(--amber); }
+
+  .progress-bar{
+    height: 4px; background: var(--line); border-radius: 2px; overflow:hidden; margin-bottom: 20px;
+  }
+  .progress-fill{
+    height:100%; background: var(--green); width:0%; transition: width .25s;
+  }
+
+  .card-stage{
+    perspective: 1400px;
+    margin-bottom: 18px;
+  }
+  .card{
+    position: relative;
+    height: 320px;
+    transform-style: preserve-3d;
+    transition: transform .5s cubic-bezier(.2,.9,.3,1);
+    cursor: pointer;
+  }
+  .card.flipped{ transform: rotateY(180deg); }
+
+  .face{
+    position:absolute; inset:0;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding: 26px 24px;
+    text-align:center;
+    background: linear-gradient(160deg, var(--panel-2) 0%, var(--panel) 100%);
+  }
+  .face::before{
+    content: attr(data-tag);
+    position:absolute; top:14px; left:16px;
+    font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform:uppercase;
+  }
+  .face::after{
+    content: attr(data-idx);
+    position:absolute; top:14px; right:16px;
+    font-size: 9px; color: var(--text-dim);
+  }
+
+  .front .code{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 52px; font-weight: 700; color: var(--amber);
+    letter-spacing: 1px;
+    text-shadow: 0 0 24px rgba(255,183,3,0.25);
+  }
+  .front .hint{
+    margin-top: 14px; font-size: 11px; color: var(--text-dim); letter-spacing: 1px;
+  }
+
+  .back{
+    transform: rotateY(180deg);
+    background: linear-gradient(160deg, var(--green-dim) 0%, var(--panel) 120%);
+    border-color: var(--green);
+    justify-content: center;
+    gap: 14px;
+  }
+  .back .meaning{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 700; color: var(--text);
+    line-height: 1.3;
+  }
+  .back .code-small{
+    font-size: 12px; color: var(--green); letter-spacing: 1px;
+  }
+  .back .divider{
+    width: 40px; height: 1px; background: var(--line);
+  }
+  .back .usage-label{
+    font-size: 9px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase;
+  }
+  .back .usage{
+    font-size: 13px; color: var(--text-dim); font-style: italic; line-height: 1.55;
+    max-width: 92%;
+  }
+  .back .usage .hl{
+    color: var(--amber); font-style: normal; font-weight: 700;
+  }
+  .back .usage .hl2{
+    color: var(--green); font-style: normal; font-weight: 700;
+  }
+
+  .controls{
+    display:flex; gap: 8px; margin-bottom: 12px;
+  }
+  .btn{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    padding: 12px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+    cursor:pointer;
+    letter-spacing: 0.5px;
+    transition: all .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn.prev, .btn.next{ background: var(--panel-2); color: var(--text-dim); flex: 0 0 60px; }
+  .btn.dont-know{ border-color: var(--danger); color: var(--danger); }
+  .btn.dont-know:hover{ background: rgba(239,68,68,0.08); }
+  .btn.know{ border-color: var(--green); color: var(--green); }
+  .btn.know:hover{ background: rgba(74,222,128,0.08); }
+
+  .footnote{
+    text-align:center; font-size: 10px; color: var(--text-dim); letter-spacing: 0.5px; margin-top: 6px;
+  }
+  .footnote kbd{
+    background: var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:1px 5px; color: var(--amber);
+  }
+  .legend{
+    text-align:center; font-size: 10px; color: var(--text-dim); margin-top: 4px;
+  }
+  .legend .hl{ color: var(--amber); font-weight:700; }
+  .legend .hl2{ color: var(--green); font-weight:700; }
+
+  .reset-row{ display:flex; justify-content:center; margin-top: 18px; }
+  .reset-btn{
+    font-family:'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim);
+    background:none; border:1px solid var(--line); border-radius: 6px; padding: 6px 12px; cursor:pointer; letter-spacing:1px;
+  }
+  .reset-btn:hover{ color: var(--amber); border-color: var(--amber-dim); }
+  .review-toggle-btn.active{
+    background: rgba(255,183,3,0.1);
+    border-color: var(--amber);
+    color: var(--amber);
+    font-weight: 700;
+  }
+
+  .done-banner{
+    display:none;
+    text-align:center; padding: 30px 20px; border:1px dashed var(--green); border-radius: 12px;
+    color: var(--green); font-family:'Space Grotesk',sans-serif; font-size:16px; margin-bottom: 16px;
+  }
+
+  /* Quiz mode */
+  #quizMode{ display:none; }
+  .quiz-question{
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: linear-gradient(160deg, var(--panel-2) 0%, var(--panel) 100%);
+    padding: 30px 24px 24px;
+    text-align:center;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .quiz-question::before{
+    content: "PERGUNTA";
+    position:absolute; top:14px; left:16px;
+    font-size: 9px; letter-spacing: 2px; color: var(--text-dim);
+  }
+  .quiz-code{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 44px; font-weight: 700; color: var(--amber);
+    letter-spacing: 1px;
+    text-shadow: 0 0 24px rgba(255,183,3,0.25);
+    margin-top: 6px;
+  }
+  .quiz-prompt{
+    margin-top: 10px; font-size: 12px; color: var(--text-dim); letter-spacing: 0.5px;
+  }
+  .quiz-meaning-prompt{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 21px; font-weight: 700; color: var(--amber);
+    line-height: 1.35;
+    margin-top: 6px;
+  }
+  .quiz-direction-toggle{
+    display:flex; gap: 6px; margin-bottom: 14px;
+  }
+  .dir-btn{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+    padding: 8px 4px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    border-radius: 7px;
+    cursor:pointer;
+    transition: all .15s;
+  }
+  .dir-btn:hover{ color: var(--text); }
+  .dir-btn.active{
+    background: var(--green-dim);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .quiz-options{
+    display:flex; flex-direction:column; gap: 8px; margin-bottom: 16px;
+  }
+  .quiz-option{
+    text-align:left;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    padding: 13px 14px;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+    transition: all .15s;
+    display:flex; align-items:center; gap: 10px;
+    line-height: 1.35;
+  }
+  .quiz-option .opt-key{
+    flex: 0 0 auto;
+    font-size: 10px; color: var(--text-dim);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+  .quiz-option:hover:not(.disabled){ border-color: var(--amber-dim); }
+  .quiz-option.correct{
+    border-color: var(--green); background: var(--green-dim); color: var(--green);
+  }
+  .quiz-option.correct .opt-key{ color: var(--green); border-color: var(--green); }
+  .quiz-option.wrong{
+    border-color: var(--danger); background: var(--danger-dim); color: var(--danger);
+  }
+  .quiz-option.wrong .opt-key{ color: var(--danger); border-color: var(--danger); }
+  .quiz-option.disabled{ cursor: default; }
+  .quiz-option.dim{ opacity: 0.45; }
+
+  .quiz-feedback{
+    text-align:center; font-size: 12px; min-height: 16px; margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+  .quiz-feedback.correct{ color: var(--green); }
+  .quiz-feedback.wrong{ color: var(--danger); }
+
+  .quiz-next-btn{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 700;
+    padding: 13px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--green);
+    background: var(--green-dim);
+    color: var(--green);
+    cursor:pointer;
+    letter-spacing: 0.5px;
+    display:none;
+    width: 100%;
+  }
+  .quiz-done{
+    display:none;
+    text-align:center; padding: 30px 20px; border:1px dashed var(--amber); border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  .quiz-done .score-big{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 40px; font-weight: 700; color: var(--amber);
+    margin-bottom: 6px;
+  }
+  .quiz-done .score-label{ font-size: 12px; color: var(--text-dim); margin-bottom: 16px; }
+
+  /* Reference / cheat sheet mode */
+  #refMode{ display:none; }
+  .ref-search{
+    width:100%;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    padding: 12px 14px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 9px;
+    margin-bottom: 14px;
+    outline: none;
+  }
+  .ref-search::placeholder{ color: var(--text-dim); }
+  .ref-search:focus{ border-color: var(--green); }
+  .ref-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    align-items: start;
+  }
+  .ref-panel{
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+  .ref-panel.span-2{ grid-column: span 2; }
+  .ref-panel-header{
+    background: var(--green-dim);
+    color: var(--green);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .ref-panel-body{
+    column-width: 190px;
+    column-gap: 0;
+    padding: 2px 0;
+  }
+  .ref-row{
+    display:flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 11.5px;
+    break-inside: avoid;
+  }
+  .ref-code{
+    flex: 0 0 auto;
+    color: var(--amber);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .ref-meaning{ color: var(--text); line-height: 1.3; }
+  .ref-empty{
+    grid-column: 1 / -1;
+    text-align:center; color: var(--text-dim); font-size: 12px; padding: 20px;
+  }
+
+  @media (max-width: 420px){
+    .front .code{ font-size: 40px; }
+    .back .meaning{ font-size: 16px; }
+    .back .usage{ font-size: 12px; }
+    .card{ height: 320px; }
+    .quiz-code{ font-size: 34px; }
+    .ref-code{ flex-basis: 66px; }
+    .mode-btn{ font-size: 10px; padding: 10px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="console-header">
+    <div class="title-block">
+      <span class="eyebrow">● Canal Ativo</span>
+      <h1>Central de Despacho</h1>
+    </div>
+    <div class="clock">STATUS: <b>ESTUDANDO</b><br>UNIDADE: 10-41</div>
+  </div>
+
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="modeFlashBtn">📇 CARTÕES</button>
+    <button class="mode-btn" id="modeQuizBtn">❓ QUIZ</button>
+    <button class="mode-btn" id="modeRefBtn">📋 REFERÊNCIA</button>
+  </div>
+
+  <div class="channels" id="channels"></div>
+
+  <!-- FLASHCARD MODE -->
+  <div id="flashcardMode">
+    <div class="stats">
+      <span>Cartão <b id="statPos">1</b> / <b id="statTotal">0</b></span>
+      <span class="known">Sei: <b id="statKnow">0</b></span>
+      <span class="review">Revisar: <b id="statReview">0</b></span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="done-banner" id="doneBanner">
+      ✓ Categoria concluída. Use "Reiniciar" para praticar de novo,<br>ou troque de canal acima.
+    </div>
+
+    <div class="card-stage">
+      <div class="card" id="card">
+        <div class="face front" data-tag="Código" data-idx="">
+          <div class="code" id="codeText">10-00</div>
+          <div class="hint">toque para ver o significado</div>
+        </div>
+        <div class="face back" data-tag="Significado" data-idx="">
+          <div class="meaning" id="meaningText">—</div>
+          <div class="code-small" id="codeSmall">10-00</div>
+          <div class="divider"></div>
+          <div class="usage-label">Em uso na rádio</div>
+          <div class="usage" id="usageText">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn prev" id="prevBtn">‹</button>
+      <button class="btn dont-know" id="dontKnowBtn">✕ Revisar</button>
+      <button class="btn know" id="knowBtn">✓ Sei</button>
+      <button class="btn next" id="nextBtn">›</button>
+    </div>
+
+    <div class="footnote">
+      <kbd>espaço</kbd> vira o cartão &nbsp; <kbd>←</kbd><kbd>→</kbd> navega &nbsp; <kbd>K</kbd> sei &nbsp; <kbd>R</kbd> revisar
+    </div>
+    <div class="legend"><span class="hl">■</span> código deste cartão &nbsp; <span class="hl2">■</span> outros códigos citados</div>
+
+    <div class="reset-row">
+      <button class="reset-btn review-toggle-btn" id="reviewOnlyBtnFlash">🎯 SÓ REVISAR</button>
+      <button class="reset-btn" id="shuffleBtn" style="margin-left:8px;">⤨ EMBARALHAR</button>
+      <button class="reset-btn" id="resetBtn" style="margin-left:8px;">↺ REINICIAR PROGRESSO</button>
+    </div>
+  </div>
+
+  <!-- QUIZ MODE -->
+  <div id="quizMode">
+    <div class="quiz-direction-toggle" id="quizDirectionToggle">
+      <button class="dir-btn active" id="dirForwardBtn" data-dir="forward">CÓDIGO → SIGNIFICADO</button>
+      <button class="dir-btn" id="dirReverseBtn" data-dir="reverse">SIGNIFICADO → CÓDIGO</button>
+      <button class="dir-btn" id="dirMixedBtn" data-dir="mixed">MISTURADO</button>
+    </div>
+    <div class="stats">
+      <span>Pergunta <b id="quizPosLabel">1</b> / <b id="quizTotalLabel">0</b></span>
+      <span class="known">Acertos: <b id="quizScoreLabel">0</b></span>
+      <span class="review">Erros: <b id="quizWrongLabel">0</b></span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="quizProgressFill"></div></div>
+
+    <div class="quiz-done" id="quizDoneBanner">
+      <div class="score-big" id="quizFinalScore">0/0</div>
+      <div class="score-label">Quiz concluído</div>
+      <button class="reset-btn" id="quizRestartBtn">↺ REFAZER QUIZ</button>
+    </div>
+
+    <div class="quiz-question" id="quizQuestionBox">
+      <div class="quiz-code" id="quizCode">10-00</div>
+      <div class="quiz-prompt">Qual é o significado deste código?</div>
+    </div>
+
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+    <button class="quiz-next-btn" id="quizNextBtn">PRÓXIMA PERGUNTA →</button>
+
+    <div class="footnote" style="margin-top:14px;">
+      <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> escolhe &nbsp; <kbd>espaço</kbd> avança
+    </div>
+    <div class="reset-row">
+      <button class="reset-btn review-toggle-btn" id="reviewOnlyBtnQuiz">🎯 SÓ REVISAR</button>
+      <button class="reset-btn" id="quizShuffleRestartBtn" style="margin-left:8px;">↺ REINICIAR QUIZ</button>
+    </div>
+  </div>
+
+  <!-- REFERENCE / CHEAT SHEET MODE -->
+  <div id="refMode">
+    <input type="text" class="ref-search" id="refSearch" placeholder="🔎 Buscar código ou significado (ex: 10-52, reforço...)">
+    <div id="refList"></div>
+  </div>
+
+</div>
+
+<script>
+const DATA = {
+  "10 Mais Comuns": [
+    ["10-03","Silêncio na rádio","Atenção, 10-03 no canal principal até novo aviso."],
+    ["10-04","Entendido","10-04, 10-25 até o local indicado."],
+    ["10-07","Finalizando patrulha","10-07, unidade 12 retornando à base, 10-04."],
+    ["10-08","Iniciar/retornando patrulha","10-08, unidade disponível, aguardando 10-25."],
+    ["10-09","Repita","Não entendi, 10-09, favor confirmar o 10-20."],
+    ["10-10","Combate em progresso","10-10 na Rua das Flores, solicito 10-77 imediato."],
+    ["10-11","Agressão com arma letal","10-11 no mercado central, solicito 10-78."],
+    ["10-12","Aguardar","10-12, aguarde até o 10-23 da unidade de apoio."],
+    ["10-13A","LEO abatido (emergência)","10-13A, oficial ferido, 10-78 e 10-52 imediatos!"],
+    ["10-13B","LEO abatido","10-13B confirmado, solicito 10-52 ao local."],
+    ["10-14A","EMS abatido (emergência)","10-14A, paramédico atacado, 10-78 agora!"],
+    ["10-14B","EMS abatido","10-14B, equipe fora de serviço, aguardando 10-77."],
+    ["10-20","Localização","Qual seu 10-20? Estou 10-76 para o mesmo endereço."],
+    ["10-22","Caça ilegal","10-22 reportada na zona rural, 10-76 para verificar."],
+    ["10-23","Chegou no local","10-23, iniciando o 10-38 do veículo suspeito."],
+    ["10-25","Ir ao local","10-25 até a Avenida Central, confirme 10-04 ao chegar."],
+    ["10-31","Crime em progresso","10-31 na loja, solicito 10-77 e 10-25 de unidade próxima."],
+    ["10-31A","Invasão de propriedade","10-31A na residência 45, 10-76 para o local."],
+    ["10-31B","Assalto a mão armada","10-31B no banco, 10-78 imediato, suspeito 10-32."],
+    ["10-32","Indivíduo armado","10-32 avistado no parque, aguardando 10-77."],
+    ["10-38","Abordagem a veículo","Iniciando 10-38 na placa ABC-1234, solicito 10-28."],
+    ["10-41","Iniciando em serviço","10-41, unidade 7 pronta, 10-08 confirmado."],
+    ["10-42","Finalizando serviço","10-42, 10-07 concluído, retornando à base."],
+    ["10-47","Pessoa ferida","10-47 no acidente, solicito 10-52 com urgência."],
+    ["10-50","Acidente","10-50 na BR-101, há 10-47 no local, envie 10-52."],
+    ["10-52","Necessito de EMS","10-52, enviar equipe ao 10-20 atual."],
+    ["10-60","Roubo de veículo","10-60 no estacionamento, veículo consta 10-99."],
+    ["10-71","Disparos","10-71 na região central, 10-78 imediato!"],
+    ["10-76","A caminho do/da","10-76 para o hospital, 10-47 a bordo."],
+    ["10-77","Pedindo apoio","10-77, precisamos de unidade adicional no 10-20."],
+    ["10-78","Pedindo apoio (emergência)","10-78! Situação crítica, todas unidades 10-76!"],
+    ["10-80","Perseguição em andamento","10-80 pela Marginal, suspeito de 10-99."],
+    ["10-81","Perseguição a pé","10-81, suspeito de 10-90 fugindo pelo beco."],
+    ["10-90","Roubo em progresso","10-90 na joalheria, solicito 10-77, aguardo 10-95."],
+    ["10-94","Direção imprudente","10-94 na rodovia, unidade 10-25 para verificar."],
+    ["10-95","Suspeito em custódia","10-95, aguardando 10-91 até a delegacia."],
+    ["10-98","Rebelião no presídio","10-98 na unidade norte, solicito 10-78."],
+    ["10-98A","Fuga da prisão","10-98A, dois detentos fugiram, iniciar 10-80."],
+    ["10-98B","Lockdown no presídio","10-98B ativado, todas as alas em 10-12."],
+    ["10-99","Veículo roubado","10-99 confirmado, placa DEF-5678, iniciar 10-80 se avistado."],
+    ["10-99A","Furto qualificado de veículo","10-99A no shopping, solicito 10-28 da área."],
+    ["10-99B","Veículo furtado na área","10-99B, atenção redobrada, reporte 10-38 suspeitos."]
+  ],
+  "Outros Códigos": [
+    ["10-01","Incapaz de entender","10-01, sinal fraco, favor 10-09."],
+    ["10-02","Sinal bom","10-02, comunicação clara, prossiga com o 10-20."],
+    ["10-06","Ocupado se não for urgente","10-06, chame apenas em caso de 10-78."],
+    ["10-15","Civil abatido","10-15 confirmado, aguardando perícia e 10-91."],
+    ["10-27","Veículo com chassi raspado","10-27 identificado durante 10-38 de rotina."],
+    ["10-28","Registro do veículo","Solicito 10-28 da placa GHI-9012 antes do 10-38."],
+    ["10-29","Checagem de mandado","10-29 para o suspeito, aguardando 10-04."],
+    ["10-33A","Furto leve","10-33A no supermercado, 10-95 do suspeito confirmado."],
+    ["10-34","Venda de narcótico","10-34 na praça, iniciar 10-37 e 10-39."],
+    ["10-37","Atividade suspeita","10-37 perto do galpão, enviando unidade para 10-23."],
+    ["10-39","Abordagem a pessoa","Iniciando 10-39, solicito 10-28 se houver veículo."],
+    ["10-40","Sem luzes e sirenes","10-40, 10-25 até o local sem chamar atenção."],
+    ["10-45","Carcaça animal","10-45 na pista, solicito 10-51 para remoção."],
+    ["10-51","Requisitar guincho","10-51 para o veículo após o 10-50."],
+    ["10-54","Gado na via","10-54 bloqueando a estrada, unidade 10-25."],
+    ["10-57","Alarme de roubo","10-57 disparado, 10-25 para verificar possível 10-90."],
+    ["10-59","Escolta ou Comboio","10-59 para o comboio, manter 10-02 constante."],
+    ["10-66","Ignorar mensagem","10-66, desconsiderar o último 10-20 informado."],
+    ["10-74","Negativo","10-74, não há 10-32 no local."],
+    ["10-79","Pessoa morta","10-79 confirmado, aguardando perícia e 10-91."],
+    ["10-91","Transporte","10-91 do detido após o 10-95."],
+    ["10-97","Teste de rádio","10-97, testando o canal, responda 10-04."],
+    ["10-SHELLY","Alarme de restaurante","10-SHELLY ativado, unidade 10-25 até o local."]
+  ],
+  "Alfabeto Fonético": [
+    ["A","Alpha","'Alpha' soletra a letra A numa placa durante o 10-28."],
+    ["B","Bravo","'Bravo' soletra a letra B numa placa durante o 10-28."],
+    ["C","Charlie","'Charlie' soletra a letra C ao confirmar o 10-20."],
+    ["D","Delta","'Delta' soletra a letra D ao anotar um nome no 10-39."],
+    ["E","Echo","'Echo' soletra a letra E numa placa durante o 10-28."],
+    ["F","Foxtrot","'Foxtrot' soletra a letra F e também identifica a unidade FTO."],
+    ["G","Golf","'Golf' soletra a letra G ao anotar um sobrenome no 10-39."],
+    ["H","Hotel","'Hotel' soletra a letra H ao confirmar o 10-20."],
+    ["I","India","'India' soletra a letra I e também identifica a unidade aérea Interceptor."],
+    ["J","Juliett","'Juliett' soletra a letra J ao anotar um nome no 10-39."],
+    ["K","Kilo","'Kilo' soletra a letra K e também identifica a unidade canina K-9."],
+    ["L","Lima","'Lima' soletra a letra L numa placa durante o 10-28."],
+    ["M","Mike","'Mike' soletra a letra M e também identifica a unidade Motor."],
+    ["N","Novembre","'Novembre' soletra a letra N numa placa durante o 10-28."],
+    ["O","Oscar","'Oscar' soletra a letra O ao confirmar o 10-20."],
+    ["P","Papa","'Papa' soletra a letra P numa placa durante o 10-28."],
+    ["Q","Quebec","'Quebec' soletra a letra Q ao anotar um nome no 10-39."],
+    ["R","Romeo","'Romeo' soletra a letra R ao confirmar o 10-20."],
+    ["S","Sierra","'Sierra' soletra a letra S e também identifica a unidade blindada SWAT."],
+    ["T","Tango","'Tango' soletra a letra T numa placa durante o 10-28."],
+    ["U","Uniform","'Uniform' soletra a letra U e também identifica a unidade infiltrada."],
+    ["V","Victor","'Victor' soletra a letra V ao anotar um nome no 10-39."],
+    ["W","Whiskey","'Whiskey' soletra a letra W numa placa durante o 10-28."],
+    ["X","X-ray","'X-ray' soletra a letra X numa placa durante o 10-28."],
+    ["Y","Yankee","'Yankee' soletra a letra Y ao anotar um nome no 10-39."],
+    ["Z","Zulu","'Zulu' soletra a letra Z ao encerrar a soletração do 10-28."]
+  ],
+  "Níveis 1–6": [
+    ["1","Rotina (sem luzes e sirene) / Trânsito sem apoio","Código 1 para o 10-25, sem luzes nem sirene."],
+    ["2","Urgência (luzes ligadas sem sirene) / Trânsito com apoio","Código 2 no 10-76, luzes ligadas, atenção ao trânsito."],
+    ["3","Emergência (luzes e sirene ligadas) / Abordagem","Código 3 para o 10-10, luzes e sirene, emergência total."],
+    ["4","Situação finalizada / Sob controle","Código 4, situação sob 10-95, obrigado pelo 10-77."],
+    ["5","Fogo liberado","Código 5 autorizado após o 10-11 confirmado."],
+    ["6","Investigando o local","Código 6, investigando antes de iniciar o 10-38."]
+  ],
+  "Prefixos": [
+    ["Foxtrot","FTO","Foxtrot 3 chegando à base, 10-41 confirmado."],
+    ["Mike","Motor","Mike 5 em 10-80 de motocicleta pela avenida."],
+    ["India","Interceptor","India 1 decolando para apoio no 10-80."],
+    ["Alpha","Air","Alpha 2 sobrevoando a área do 10-31."],
+    ["Uniform","Undercover","Uniform 7 monitorando o 10-34 de forma discreta."],
+    ["Sierra","Blindado SWAT","Sierra 1 se aproximando da cena do 10-98 com o blindado."],
+    ["Kilo","K-9","Kilo 4 farejando a área durante o 10-90."]
+  ]
+};
+
+const ALL_KEY = "Tudo";
+let appMode = "flashcards"; // "flashcards" | "quiz" | "reference"
+let currentCategory = ALL_KEY;
+let deck = [];
+let pos = 0;
+let flipped = false;
+let knownSet = new Set();
+let reviewSet = new Set();
+let reviewOnlyMode = false;
+
+// Quiz state
+let quizDeck = [];
+let quizPos = 0;
+let quizScore = 0;
+let quizWrong = 0;
+let quizAnswered = false;
+let quizCurrentOptions = [];
+let quizDirectionSetting = 'forward'; // 'forward' | 'reverse' | 'mixed'
+let quizCurrentDirection = 'forward'; // resolved direction for the current question
+
+function buildDeck(cat){
+  let entries = [];
+  if(cat === ALL_KEY){
+    Object.keys(DATA).forEach(k => entries = entries.concat(DATA[k].map(([c,m,u]) => ({c,m,u,cat:k}))));
+  } else {
+    entries = DATA[cat].map(([c,m,u]) => ({c,m,u,cat}));
+  }
+  return entries;
+}
+
+function keyFor(item){ return item.cat + "::" + item.c; }
+
+function refreshDeck(cat){
+  let base = buildDeck(cat);
+  if(reviewOnlyMode){
+    base = base.filter(it => reviewSet.has(keyFor(it)));
+  }
+  return base;
+}
+
+function updateReviewToggleUI(){
+  const count = reviewSet.size;
+  [document.getElementById('reviewOnlyBtnFlash'), document.getElementById('reviewOnlyBtnQuiz')].forEach(btn => {
+    if(!btn) return;
+    btn.classList.toggle('active', reviewOnlyMode);
+    btn.textContent = '🎯 SÓ REVISAR (' + count + ')';
+  });
+}
+
+function toggleReviewOnly(){
+  reviewOnlyMode = !reviewOnlyMode;
+  deck = refreshDeck(currentCategory);
+  pos = 0;
+  flipped = false;
+  updateReviewToggleUI();
+  if(appMode === 'flashcards'){ renderCard(); }
+  else if(appMode === 'quiz'){ startQuiz(); }
+}
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function renderChannels(){
+  const container = document.getElementById('channels');
+  container.innerHTML = '';
+  const cats = [ALL_KEY, ...Object.keys(DATA)];
+  cats.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'ch-btn' + (cat === currentCategory ? ' active' : '');
+    btn.textContent = cat === ALL_KEY ? 'TODOS' : cat.toUpperCase();
+    btn.onclick = () => {
+      currentCategory = cat;
+      deck = refreshDeck(cat);
+      pos = 0;
+      flipped = false;
+      renderChannels();
+      if(appMode === 'flashcards'){
+        renderCard();
+      } else if(appMode === 'quiz') {
+        startQuiz();
+      }
+    };
+    container.appendChild(btn);
+  });
+}
+
+function updateStats(){
+  document.getElementById('statTotal').textContent = deck.length;
+  document.getElementById('statPos').textContent = deck.length ? (pos+1) : 0;
+  document.getElementById('statKnow').textContent = knownSet.size;
+  document.getElementById('statReview').textContent = reviewSet.size;
+  const total = deck.length || 1;
+  let doneCount = deck.filter(it => knownSet.has(keyFor(it))).length;
+  document.getElementById('progressFill').style.width = Math.round((doneCount/total)*100) + '%';
+}
+
+function highlightCodes(usage, primaryCode){
+  if(!usage) return '';
+  const pattern = /10-(?:SHELLY|[0-9]+[A-Z]*)/g;
+  return usage.replace(pattern, (match) => {
+    const cls = (match === primaryCode) ? 'hl' : 'hl2';
+    return '<span class="' + cls + '">' + match + '</span>';
+  });
+}
+
+function renderCard(){
+  const banner = document.getElementById('doneBanner');
+  const stage = document.querySelector('.card-stage');
+  const controls = document.querySelector('#flashcardMode .controls');
+  if(deck.length === 0 || pos >= deck.length){
+    banner.style.display = 'block';
+    banner.innerHTML = reviewOnlyMode
+      ? '🎉 Nada para revisar aqui! Marque cartões com "✕ Revisar" durante o estudo,<br>ou desative o filtro "🎯 Só Revisar" para ver todos de novo.'
+      : '✓ Categoria concluída. Use "Reiniciar" para praticar de novo,<br>ou troque de canal acima.';
+    stage.style.display = 'none';
+    controls.style.display = 'none';
+  } else {
+    banner.style.display = 'none';
+    stage.style.display = 'block';
+    controls.style.display = 'flex';
+    const item = deck[pos];
+    document.getElementById('codeText').textContent = item.c;
+    document.getElementById('meaningText').textContent = item.m;
+    document.getElementById('codeSmall').textContent = item.c;
+    document.getElementById('usageText').innerHTML = highlightCodes(item.u, item.c);
+    document.querySelector('.front').setAttribute('data-idx', item.cat);
+    document.querySelector('.back').setAttribute('data-idx', item.cat);
+    const card = document.getElementById('card');
+    card.classList.toggle('flipped', flipped);
+  }
+  updateStats();
+}
+
+function nextCard(){
+  if(pos < deck.length){ pos++; flipped = false; renderCard(); }
+}
+function prevCard(){
+  if(pos > 0){ pos--; flipped = false; renderCard(); }
+  else { flipped = false; renderCard(); }
+}
+function markKnow(){
+  if(pos >= deck.length) return;
+  const k = keyFor(deck[pos]);
+  knownSet.add(k);
+  reviewSet.delete(k);
+  updateReviewToggleUI();
+  if(reviewOnlyMode){
+    deck.splice(pos, 1);
+    flipped = false;
+    renderCard();
+  } else {
+    nextCard();
+  }
+}
+function markReview(){
+  if(pos >= deck.length) return;
+  const k = keyFor(deck[pos]);
+  reviewSet.add(k);
+  knownSet.delete(k);
+  updateReviewToggleUI();
+  nextCard();
+}
+
+document.getElementById('card').addEventListener('click', () => {
+  if(appMode !== 'flashcards') return;
+  if(deck.length === 0 || pos >= deck.length) return;
+  flipped = !flipped;
+  renderCard();
+});
+document.getElementById('nextBtn').onclick = nextCard;
+document.getElementById('prevBtn').onclick = prevCard;
+document.getElementById('knowBtn').onclick = markKnow;
+document.getElementById('dontKnowBtn').onclick = markReview;
+document.getElementById('shuffleBtn').onclick = () => {
+  deck = shuffle(deck);
+  pos = 0; flipped = false; renderCard();
+};
+document.getElementById('resetBtn').onclick = () => {
+  knownSet.clear(); reviewSet.clear();
+  reviewOnlyMode = false;
+  updateReviewToggleUI();
+  deck = refreshDeck(currentCategory);
+  pos = 0; flipped = false; renderCard();
+};
+document.getElementById('reviewOnlyBtnFlash').onclick = toggleReviewOnly;
+document.getElementById('reviewOnlyBtnQuiz').onclick = toggleReviewOnly;
+document.querySelectorAll('.dir-btn').forEach(btn => {
+  btn.onclick = () => setQuizDirection(btn.dataset.dir);
+});
+
+/* ---------------- QUIZ MODE ---------------- */
+
+function buildOptionsFor(item, direction){
+  const pool = deck.filter(d => d.c !== item.c || d.cat !== item.cat);
+  if(direction === 'reverse'){
+    const distractors = shuffle(pool).slice(0, 3).map(d => d.c);
+    return shuffle([item.c, ...distractors]);
+  }
+  const distractors = shuffle(pool).slice(0, 3).map(d => d.m);
+  return shuffle([item.m, ...distractors]);
+}
+
+function resolveDirection(){
+  if(quizDirectionSetting === 'mixed'){
+    return Math.random() < 0.5 ? 'forward' : 'reverse';
+  }
+  return quizDirectionSetting;
+}
+
+function setQuizDirection(dir){
+  quizDirectionSetting = dir;
+  document.querySelectorAll('.dir-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.dir === dir);
+  });
+  startQuiz();
+}
+
+function startQuiz(){
+  quizDeck = shuffle(deck);
+  quizPos = 0;
+  quizScore = 0;
+  quizWrong = 0;
+  document.getElementById('quizDoneBanner').style.display = 'none';
+  document.getElementById('quizQuestionBox').style.display = 'block';
+  document.getElementById('quizOptions').style.display = 'flex';
+  renderQuiz();
+}
+
+function renderQuiz(){
+  if(quizDeck.length < 4){
+    document.getElementById('quizQuestionBox').style.display = 'none';
+    const msg = reviewOnlyMode
+      ? 'Menos de 4 cartões marcados para revisão nesta categoria. Responda mais perguntas erradas ou desative o filtro "🎯 Só Revisar".'
+      : 'Esta categoria não tem cartões suficientes para o quiz (mínimo 4).';
+    document.getElementById('quizOptions').innerHTML = '<p style="text-align:center;color:var(--text-dim);font-size:12px;">' + msg + '</p>';
+    document.getElementById('quizOptions').style.display = 'block';
+    document.getElementById('quizNextBtn').style.display = 'none';
+    return;
+  }
+  if(quizPos >= quizDeck.length){
+    finishQuiz();
+    return;
+  }
+  quizAnswered = false;
+  const item = quizDeck[quizPos];
+  quizCurrentDirection = resolveDirection();
+  quizCurrentOptions = buildOptionsFor(item, quizCurrentDirection);
+
+  const box = document.getElementById('quizQuestionBox');
+  if(quizCurrentDirection === 'reverse'){
+    box.innerHTML = '<div class="quiz-meaning-prompt" id="quizMeaningPrompt">' + item.m + '</div>'
+      + '<div class="quiz-prompt">Qual código corresponde a este significado?</div>';
+  } else {
+    box.innerHTML = '<div class="quiz-code" id="quizCode">' + item.c + '</div>'
+      + '<div class="quiz-prompt">Qual é o significado deste código?</div>';
+  }
+
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('quizFeedback').className = 'quiz-feedback';
+  document.getElementById('quizNextBtn').style.display = 'none';
+
+  const optContainer = document.getElementById('quizOptions');
+  optContainer.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  quizCurrentOptions.forEach((optText, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.innerHTML = '<span class="opt-key">' + letters[i] + '</span><span>' + optText + '</span>';
+    btn.onclick = () => selectQuizOption(i, item);
+    optContainer.appendChild(btn);
+  });
+
+  updateQuizStats();
+}
+
+function selectQuizOption(index, item){
+  if(quizAnswered) return;
+  quizAnswered = true;
+  const correctValue = (quizCurrentDirection === 'reverse') ? item.c : item.m;
+  const chosenText = quizCurrentOptions[index];
+  const isCorrect = chosenText === correctValue;
+  const buttons = document.querySelectorAll('.quiz-option');
+  buttons.forEach((btn, i) => {
+    btn.classList.add('disabled');
+    if(quizCurrentOptions[i] === correctValue){
+      btn.classList.add('correct');
+    } else if(i === index){
+      btn.classList.add('wrong');
+    } else {
+      btn.classList.add('dim');
+    }
+  });
+
+  const k = keyFor(item);
+  const feedback = document.getElementById('quizFeedback');
+  const answerLabel = item.c + ' = ' + item.m;
+  if(isCorrect){
+    quizScore++;
+    knownSet.add(k);
+    reviewSet.delete(k);
+    feedback.textContent = '✓ Correto! ' + answerLabel;
+    feedback.className = 'quiz-feedback correct';
+  } else {
+    quizWrong++;
+    reviewSet.add(k);
+    knownSet.delete(k);
+    feedback.textContent = '✕ Errado. ' + answerLabel;
+    feedback.className = 'quiz-feedback wrong';
+  }
+  updateReviewToggleUI();
+  document.getElementById('quizNextBtn').style.display = 'block';
+  updateQuizStats();
+}
+
+function nextQuizQuestion(){
+  if(!quizAnswered) return;
+  quizPos++;
+  renderQuiz();
+}
+
+function finishQuiz(){
+  document.getElementById('quizQuestionBox').style.display = 'none';
+  document.getElementById('quizOptions').style.display = 'none';
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('quizNextBtn').style.display = 'none';
+  document.getElementById('quizDoneBanner').style.display = 'block';
+  document.getElementById('quizFinalScore').textContent = quizScore + '/' + quizDeck.length;
+  updateQuizStats();
+}
+
+function updateQuizStats(){
+  document.getElementById('quizPosLabel').textContent = Math.min(quizPos+1, quizDeck.length || 1);
+  document.getElementById('quizTotalLabel').textContent = quizDeck.length;
+  document.getElementById('quizScoreLabel').textContent = quizScore;
+  document.getElementById('quizWrongLabel').textContent = quizWrong;
+  const total = quizDeck.length || 1;
+  document.getElementById('quizProgressFill').style.width = Math.round((quizPos/total)*100) + '%';
+}
+
+document.getElementById('quizNextBtn').onclick = nextQuizQuestion;
+document.getElementById('quizRestartBtn').onclick = startQuiz;
+document.getElementById('quizShuffleRestartBtn').onclick = startQuiz;
+
+/* ---------------- REFERENCE / CHEAT SHEET MODE ---------------- */
+
+function normalizeText(s){
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function renderReference(filterText){
+  const container = document.getElementById('refList');
+  container.innerHTML = '';
+  const query = filterText ? normalizeText(filterText.trim()) : '';
+  let anyResult = false;
+
+  Object.keys(DATA).forEach(catName => {
+    const rows = DATA[catName].filter(([c, m]) => {
+      if(!query) return true;
+      return normalizeText(c).includes(query) || normalizeText(m).includes(query);
+    });
+    if(rows.length === 0) return;
+    anyResult = true;
+
+    const panel = document.createElement('div');
+    panel.className = 'ref-panel';
+
+    if(rows.length > 15) panel.classList.add('span-2');
+
+    const header = document.createElement('div');
+    header.className = 'ref-panel-header';
+    header.textContent = catName;
+    panel.appendChild(header);
+
+    const body = document.createElement('div');
+    body.className = 'ref-panel-body';
+    rows.forEach(([c, m]) => {
+      const row = document.createElement('div');
+      row.className = 'ref-row';
+      row.innerHTML = '<span class="ref-code">' + c + '</span><span class="ref-meaning">' + m + '</span>';
+      body.appendChild(row);
+    });
+    panel.appendChild(body);
+
+    container.appendChild(panel);
+  });
+
+  if(!anyResult){
+    const empty = document.createElement('div');
+    empty.className = 'ref-empty';
+    empty.textContent = 'Nenhum código encontrado para "' + filterText + '".';
+    container.appendChild(empty);
+  }
+}
+
+document.getElementById('refSearch').addEventListener('input', (e) => {
+  renderReference(e.target.value);
+});
+
+/* ---------------- MODE SWITCHING ---------------- */
+
+function switchMode(mode){
+  appMode = mode;
+  const flashBtn = document.getElementById('modeFlashBtn');
+  const quizBtn = document.getElementById('modeQuizBtn');
+  const refBtn = document.getElementById('modeRefBtn');
+  const flashSection = document.getElementById('flashcardMode');
+  const quizSection = document.getElementById('quizMode');
+  const refSection = document.getElementById('refMode');
+  const channels = document.getElementById('channels');
+  document.querySelector('.wrap').classList.toggle('ref-wide', mode === 'reference');
+
+  flashBtn.classList.toggle('active', mode === 'flashcards');
+  quizBtn.classList.toggle('active', mode === 'quiz');
+  refBtn.classList.toggle('active', mode === 'reference');
+
+  flashSection.style.display = (mode === 'flashcards') ? 'block' : 'none';
+  quizSection.style.display = (mode === 'quiz') ? 'block' : 'none';
+  refSection.style.display = (mode === 'reference') ? 'block' : 'none';
+  channels.style.display = (mode === 'reference') ? 'none' : 'flex';
+
+  if(mode === 'flashcards'){ renderCard(); }
+  else if(mode === 'quiz'){ startQuiz(); }
+  else if(mode === 'reference'){
+    document.getElementById('refSearch').value = '';
+    renderReference('');
+  }
+}
+
+document.getElementById('modeFlashBtn').onclick = () => switchMode('flashcards');
+document.getElementById('modeQuizBtn').onclick = () => switchMode('quiz');
+document.getElementById('modeRefBtn').onclick = () => switchMode('reference');
+
+/* ---------------- KEYBOARD ---------------- */
+
+document.addEventListener('keydown', (e) => {
+  if(appMode === 'flashcards'){
+    if(e.target && e.target.tagName === 'INPUT') return;
+    if(e.key === ' '){ e.preventDefault(); document.getElementById('card').click(); }
+    else if(e.key === 'ArrowRight'){ nextCard(); }
+    else if(e.key === 'ArrowLeft'){ prevCard(); }
+    else if(e.key.toLowerCase() === 'k'){ markKnow(); }
+    else if(e.key.toLowerCase() === 'r'){ markReview(); }
+  } else if(appMode === 'quiz') {
+    if(['1','2','3','4'].includes(e.key)){
+      const idx = parseInt(e.key,10) - 1;
+      const buttons = document.querySelectorAll('.quiz-option');
+      if(buttons[idx] && !quizAnswered){ buttons[idx].click(); }
+    } else if(e.key === ' '){
+      e.preventDefault();
+      if(quizAnswered){ nextQuizQuestion(); }
+    }
+  }
+});
+
+/* ---------------- INIT ---------------- */
+
+deck = refreshDeck(currentCategory);
+renderChannels();
+updateReviewToggleUI();
+renderCard();
+</script>
+</body>
+</html>
