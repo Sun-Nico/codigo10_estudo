@@ -338,6 +338,25 @@
     border-color: var(--green);
     color: var(--green);
   }
+  .dir-btn.timer-on{
+    background: rgba(255,183,3,0.1);
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+  .quiz-timer-wrap{
+    display:flex; align-items:center; gap: 8px;
+    margin-top: 14px;
+  }
+  .quiz-timer-bar{
+    flex:1; height: 6px; background: var(--line); border-radius: 3px; overflow:hidden;
+  }
+  .quiz-timer-fill{
+    height:100%; width:100%; background: var(--amber); transition: width 1s linear, background .3s;
+  }
+  .quiz-timer-fill.urgent{ background: var(--danger); }
+  .quiz-timer-label{
+    font-size: 11px; color: var(--text-dim); min-width: 28px; text-align:right;
+  }
   .quiz-options{
     display:flex; flex-direction:column; gap: 8px; margin-bottom: 16px;
   }
@@ -406,6 +425,108 @@
     margin-bottom: 6px;
   }
   .quiz-done .score-label{ font-size: 12px; color: var(--text-dim); margin-bottom: 16px; }
+
+  .lb-submit{
+    display:flex; gap: 8px; margin: 6px auto 4px; max-width: 380px;
+  }
+  .lb-submit input{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 13px;
+    padding: 10px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 8px;
+    outline: none;
+  }
+  .lb-submit input:focus{ border-color: var(--green); }
+  .lb-submit button{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--green);
+    background: var(--green-dim);
+    color: var(--green);
+    cursor:pointer;
+    white-space: nowrap;
+  }
+  .lb-submit button:disabled{
+    opacity: 0.5; cursor: default;
+  }
+  .lb-feedback{
+    font-size: 11px; text-align:center; min-height: 14px; margin-bottom: 10px;
+  }
+  .lb-feedback.ok{ color: var(--green); }
+  .lb-feedback.err{ color: var(--danger); }
+
+  .leaderboard-panel{
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .lb-header{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 14px; color: var(--amber);
+    margin-bottom: 4px;
+  }
+  .lb-header span{ color: var(--text-dim); font-weight: 400; font-size: 11px; }
+  .lb-list{ margin-top: 10px; }
+  .lb-row{
+    display:flex; align-items:center; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+  }
+  .lb-row:last-child{ border-bottom:none; }
+  .lb-rank{ flex: 0 0 30px; color: var(--text-dim); font-weight: 700; }
+  .lb-row:nth-child(1) .lb-rank{ color: var(--amber); }
+  .lb-row:nth-child(2) .lb-rank{ color: #d4d4d4; }
+  .lb-row:nth-child(3) .lb-rank{ color: #c98a4b; }
+  .lb-name{ flex:1; color: var(--text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .lb-score{ color: var(--green); font-weight: 700; white-space:nowrap; }
+  .lb-loading, .lb-empty{ color: var(--text-dim); font-size: 12px; text-align:center; padding: 10px 0; }
+
+  .player-badge{
+    display:flex; align-items:center; gap: 8px;
+    font-size: 12px; color: var(--text-dim);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 9px 14px;
+    margin-bottom: 14px;
+  }
+  .player-badge b{ color: var(--amber); }
+  .badge-edit-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--green);
+    background:none; border:none; text-decoration: underline;
+    cursor:pointer; padding: 0; margin-left: auto;
+  }
+  .player-badge input{
+    flex:1;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 7px 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 6px;
+    outline: none;
+  }
+  .player-badge input:focus{ border-color: var(--green); }
+  .player-badge .badge-save-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--green);
+    background: var(--green-dim);
+    color: var(--green);
+    cursor:pointer;
+  }
 
   /* Reference / cheat sheet mode */
   #refMode{ display:none; }
@@ -554,10 +675,14 @@
 
   <!-- QUIZ MODE -->
   <div id="quizMode">
+    <div class="player-badge" id="playerBadge"></div>
     <div class="quiz-direction-toggle" id="quizDirectionToggle">
       <button class="dir-btn active" id="dirForwardBtn" data-dir="forward">CÓDIGO → SIGNIFICADO</button>
       <button class="dir-btn" id="dirReverseBtn" data-dir="reverse">SIGNIFICADO → CÓDIGO</button>
       <button class="dir-btn" id="dirMixedBtn" data-dir="mixed">MISTURADO</button>
+    </div>
+    <div class="quiz-direction-toggle">
+      <button class="dir-btn" id="timedModeBtn">⏱ MODO CRONOMETRADO: DESLIGADO</button>
     </div>
     <div class="stats">
       <span>Pergunta <b id="quizPosLabel">1</b> / <b id="quizTotalLabel">0</b></span>
@@ -569,7 +694,17 @@
     <div class="quiz-done" id="quizDoneBanner">
       <div class="score-big" id="quizFinalScore">0/0</div>
       <div class="score-label">Quiz concluído</div>
+      <div class="lb-submit">
+        <input type="text" id="playerNameInput" placeholder="Seu nome" maxlength="24">
+        <button id="submitScoreBtn">📤 ENVIAR PRO RANKING</button>
+      </div>
+      <div class="lb-feedback" id="lbFeedback"></div>
       <button class="reset-btn" id="quizRestartBtn">↺ REFAZER QUIZ</button>
+    </div>
+
+    <div class="leaderboard-panel" id="leaderboardPanel" style="display:none;">
+      <div class="lb-header">🏆 RANKING <span id="lbModeLabel">(código → significado)</span></div>
+      <div id="leaderboardList"><p class="lb-loading">Carregando ranking...</p></div>
     </div>
 
     <div class="quiz-question" id="quizQuestionBox">
@@ -586,6 +721,7 @@
     </div>
     <div class="reset-row">
       <button class="reset-btn review-toggle-btn" id="reviewOnlyBtnQuiz">🎯 SÓ REVISAR</button>
+      <button class="reset-btn" id="viewLeaderboardBtn" style="margin-left:8px;">🏆 RANKING</button>
       <button class="reset-btn" id="quizShuffleRestartBtn" style="margin-left:8px;">↺ REINICIAR QUIZ</button>
     </div>
   </div>
@@ -598,7 +734,119 @@
 
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
+/* ---------------- LEADERBOARD (Firebase) ---------------- */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC-U8TROBdmsf_lyOfvT-N4zVeZ18Um-lU",
+  authDomain: "codigo10-leaderboard.firebaseapp.com",
+  projectId: "codigo10-leaderboard",
+  storageBucket: "codigo10-leaderboard.firebasestorage.app",
+  messagingSenderId: "1066163870279",
+  appId: "1:1066163870279:web:76d2f42df1654a7b66ef62"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function leaderboardCollectionName(){
+  return timedMode ? 'leaderboard_timed' : 'leaderboard_normal';
+}
+
+function submitScoreToLeaderboard(name, score, total){
+  const percent = total > 0 ? Math.round((score/total)*100) : 0;
+  const rankScore = percent * 100000 + score; // single sortable field, avoids composite index
+  return db.collection(leaderboardCollectionName()).add({
+    name: name.slice(0, 24),
+    score, total, percent, rankScore,
+    direction: quizDirectionSetting,
+    category: currentCategory,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+function loadLeaderboard(){
+  const listEl = document.getElementById('leaderboardList');
+  const labelEl = document.getElementById('lbModeLabel');
+  labelEl.textContent = timedMode ? '(cronometrado ⏱ 5s)' : '(sem cronômetro)';
+  listEl.innerHTML = '<p class="lb-loading">Carregando ranking...</p>';
+  db.collection(leaderboardCollectionName())
+    .orderBy('rankScore', 'desc')
+    .limit(10)
+    .get()
+    .then(snapshot => {
+      if(snapshot.empty){
+        listEl.innerHTML = '<p class="lb-empty">Ninguém no ranking ainda. Seja o primeiro!</p>';
+        return;
+      }
+      let html = '<div class="lb-list">';
+      let rank = 1;
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        html += '<div class="lb-row"><span class="lb-rank">#' + rank + '</span>'
+          + '<span class="lb-name">' + escapeHtml(d.name || 'Anônimo') + '</span>'
+          + '<span class="lb-score">' + d.score + '/' + d.total + ' (' + d.percent + '%)</span></div>';
+        rank++;
+      });
+      html += '</div>';
+      listEl.innerHTML = html;
+    })
+    .catch(err => {
+      listEl.innerHTML = '<p class="lb-empty">Não foi possível carregar o ranking agora.</p>';
+      console.error('Leaderboard error:', err);
+    });
+}
+
+function showLeaderboardPanel(){
+  document.getElementById('leaderboardPanel').style.display = 'block';
+  loadLeaderboard();
+}
+
+function getPlayerName(){
+  return localStorage.getItem('codigo10_playerName') || '';
+}
+
+function setPlayerName(name){
+  localStorage.setItem('codigo10_playerName', name);
+  renderPlayerBadge();
+}
+
+function renderPlayerBadge(){
+  const badge = document.getElementById('playerBadge');
+  const name = getPlayerName();
+  if(name){
+    badge.innerHTML = '👤 Jogando como <b>' + escapeHtml(name) + '</b><button class="badge-edit-btn" id="badgeEditBtn">trocar</button>';
+  } else {
+    badge.innerHTML = '<button class="badge-edit-btn" id="badgeEditBtn" style="margin-left:0;">👤 Definir seu nome pro ranking</button>';
+  }
+  document.getElementById('badgeEditBtn').onclick = promptPlayerName;
+}
+
+function promptPlayerName(){
+  const badge = document.getElementById('playerBadge');
+  badge.innerHTML = '<input type="text" id="badgeNameInput" placeholder="Seu nome" maxlength="24">'
+    + '<button class="badge-save-btn" id="badgeSaveBtn">Salvar</button>';
+  const input = document.getElementById('badgeNameInput');
+  input.value = getPlayerName();
+  input.focus();
+  const save = () => {
+    const val = input.value.trim();
+    if(val){ setPlayerName(val); } else { renderPlayerBadge(); }
+  };
+  document.getElementById('badgeSaveBtn').onclick = save;
+  input.addEventListener('keydown', e => {
+    if(e.key === 'Enter'){ save(); }
+    if(e.key === 'Escape'){ renderPlayerBadge(); }
+  });
+}
+
 const DATA = {
   "10 Mais Comuns": [
     ["10-03","Silêncio na rádio","Atenção, 10-03 no canal principal até novo aviso."],
@@ -735,6 +983,10 @@ let quizAnswered = false;
 let quizCurrentOptions = [];
 let quizDirectionSetting = 'forward'; // 'forward' | 'reverse' | 'mixed'
 let quizCurrentDirection = 'forward'; // resolved direction for the current question
+let timedMode = false;
+let quizTimerInterval = null;
+let quizTimeLeft = 0;
+const QUIZ_TIME_LIMIT = 5; // seconds per question
 
 function buildDeck(cat){
   let entries = [];
@@ -908,9 +1160,10 @@ document.getElementById('resetBtn').onclick = () => {
 };
 document.getElementById('reviewOnlyBtnFlash').onclick = toggleReviewOnly;
 document.getElementById('reviewOnlyBtnQuiz').onclick = toggleReviewOnly;
-document.querySelectorAll('.dir-btn').forEach(btn => {
+document.querySelectorAll('.dir-btn[data-dir]').forEach(btn => {
   btn.onclick = () => setQuizDirection(btn.dataset.dir);
 });
+document.getElementById('timedModeBtn').onclick = toggleTimedMode;
 
 /* ---------------- QUIZ MODE ---------------- */
 
@@ -933,24 +1186,64 @@ function resolveDirection(){
 
 function setQuizDirection(dir){
   quizDirectionSetting = dir;
-  document.querySelectorAll('.dir-btn').forEach(btn => {
+  document.querySelectorAll('.dir-btn[data-dir]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.dir === dir);
   });
   startQuiz();
 }
 
+function toggleTimedMode(){
+  timedMode = !timedMode;
+  const btn = document.getElementById('timedModeBtn');
+  btn.classList.toggle('timer-on', timedMode);
+  btn.textContent = timedMode ? '⏱ MODO CRONOMETRADO: LIGADO (' + QUIZ_TIME_LIMIT + 's)' : '⏱ MODO CRONOMETRADO: DESLIGADO';
+  startQuiz();
+}
+
+function stopQuestionTimer(){
+  if(quizTimerInterval){ clearInterval(quizTimerInterval); quizTimerInterval = null; }
+}
+
+function startQuestionTimer(item){
+  stopQuestionTimer();
+  if(!timedMode) return;
+  quizTimeLeft = QUIZ_TIME_LIMIT;
+  updateTimerUI();
+  quizTimerInterval = setInterval(() => {
+    quizTimeLeft--;
+    updateTimerUI();
+    if(quizTimeLeft <= 0){
+      stopQuestionTimer();
+      resolveAnswer(item, null);
+    }
+  }, 1000);
+}
+
+function updateTimerUI(){
+  const fill = document.getElementById('quizTimerFill');
+  const label = document.getElementById('quizTimerLabel');
+  if(!fill || !label) return;
+  const pct = Math.max(0, (quizTimeLeft / QUIZ_TIME_LIMIT) * 100);
+  fill.style.width = pct + '%';
+  fill.classList.toggle('urgent', quizTimeLeft <= 3);
+  label.textContent = Math.max(0, quizTimeLeft) + 's';
+}
+
 function startQuiz(){
+  stopQuestionTimer();
   quizDeck = shuffle(deck);
   quizPos = 0;
   quizScore = 0;
   quizWrong = 0;
   document.getElementById('quizDoneBanner').style.display = 'none';
+  document.getElementById('leaderboardPanel').style.display = 'none';
   document.getElementById('quizQuestionBox').style.display = 'block';
   document.getElementById('quizOptions').style.display = 'flex';
   renderQuiz();
 }
 
 function renderQuiz(){
+  stopQuestionTimer();
   if(quizDeck.length < 4){
     document.getElementById('quizQuestionBox').style.display = 'none';
     const msg = reviewOnlyMode
@@ -970,13 +1263,17 @@ function renderQuiz(){
   quizCurrentDirection = resolveDirection();
   quizCurrentOptions = buildOptionsFor(item, quizCurrentDirection);
 
+  const timerHtml = timedMode
+    ? '<div class="quiz-timer-wrap"><div class="quiz-timer-bar"><div class="quiz-timer-fill" id="quizTimerFill"></div></div><div class="quiz-timer-label" id="quizTimerLabel">' + QUIZ_TIME_LIMIT + 's</div></div>'
+    : '';
+
   const box = document.getElementById('quizQuestionBox');
   if(quizCurrentDirection === 'reverse'){
     box.innerHTML = '<div class="quiz-meaning-prompt" id="quizMeaningPrompt">' + item.m + '</div>'
-      + '<div class="quiz-prompt">Qual código corresponde a este significado?</div>';
+      + '<div class="quiz-prompt">Qual código corresponde a este significado?</div>' + timerHtml;
   } else {
     box.innerHTML = '<div class="quiz-code" id="quizCode">' + item.c + '</div>'
-      + '<div class="quiz-prompt">Qual é o significado deste código?</div>';
+      + '<div class="quiz-prompt">Qual é o significado deste código?</div>' + timerHtml;
   }
 
   document.getElementById('quizFeedback').textContent = '';
@@ -995,13 +1292,20 @@ function renderQuiz(){
   });
 
   updateQuizStats();
+  startQuestionTimer(item);
 }
 
 function selectQuizOption(index, item){
   if(quizAnswered) return;
+  stopQuestionTimer();
+  resolveAnswer(item, index);
+}
+
+function resolveAnswer(item, index){
+  if(quizAnswered) return;
   quizAnswered = true;
   const correctValue = (quizCurrentDirection === 'reverse') ? item.c : item.m;
-  const chosenText = quizCurrentOptions[index];
+  const chosenText = (index === null || index === undefined) ? null : quizCurrentOptions[index];
   const isCorrect = chosenText === correctValue;
   const buttons = document.querySelectorAll('.quiz-option');
   buttons.forEach((btn, i) => {
@@ -1028,7 +1332,7 @@ function selectQuizOption(index, item){
     quizWrong++;
     reviewSet.add(k);
     knownSet.delete(k);
-    feedback.textContent = '✕ Errado. ' + answerLabel;
+    feedback.textContent = (index === null ? '⏱ Tempo esgotado! ' : '✕ Errado. ') + answerLabel;
     feedback.className = 'quiz-feedback wrong';
   }
   updateReviewToggleUI();
@@ -1043,13 +1347,25 @@ function nextQuizQuestion(){
 }
 
 function finishQuiz(){
+  stopQuestionTimer();
   document.getElementById('quizQuestionBox').style.display = 'none';
   document.getElementById('quizOptions').style.display = 'none';
   document.getElementById('quizFeedback').textContent = '';
   document.getElementById('quizNextBtn').style.display = 'none';
   document.getElementById('quizDoneBanner').style.display = 'block';
   document.getElementById('quizFinalScore').textContent = quizScore + '/' + quizDeck.length;
+
+  const nameInput = document.getElementById('playerNameInput');
+  const savedName = getPlayerName();
+  if(savedName) nameInput.value = savedName;
+  const submitBtn = document.getElementById('submitScoreBtn');
+  submitBtn.disabled = false;
+  submitBtn.textContent = '📤 ENVIAR PRO RANKING';
+  document.getElementById('lbFeedback').textContent = '';
+  document.getElementById('lbFeedback').className = 'lb-feedback';
+
   updateQuizStats();
+  showLeaderboardPanel();
 }
 
 function updateQuizStats(){
@@ -1064,6 +1380,35 @@ function updateQuizStats(){
 document.getElementById('quizNextBtn').onclick = nextQuizQuestion;
 document.getElementById('quizRestartBtn').onclick = startQuiz;
 document.getElementById('quizShuffleRestartBtn').onclick = startQuiz;
+document.getElementById('viewLeaderboardBtn').onclick = showLeaderboardPanel;
+document.getElementById('submitScoreBtn').onclick = () => {
+  const nameInput = document.getElementById('playerNameInput');
+  const name = nameInput.value.trim();
+  const feedback = document.getElementById('lbFeedback');
+  if(!name){
+    feedback.textContent = 'Digite seu nome antes de enviar.';
+    feedback.className = 'lb-feedback err';
+    return;
+  }
+  const submitBtn = document.getElementById('submitScoreBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+  setPlayerName(name);
+  submitScoreToLeaderboard(name, quizScore, quizDeck.length)
+    .then(() => {
+      feedback.textContent = '✓ Pontuação enviada!';
+      feedback.className = 'lb-feedback ok';
+      submitBtn.textContent = '✓ ENVIADO';
+      showLeaderboardPanel();
+    })
+    .catch(err => {
+      feedback.textContent = 'Erro ao enviar. Tente de novo.';
+      feedback.className = 'lb-feedback err';
+      submitBtn.disabled = false;
+      submitBtn.textContent = '📤 ENVIAR PRO RANKING';
+      console.error('Submit score error:', err);
+    });
+};
 
 /* ---------------- REFERENCE / CHEAT SHEET MODE ---------------- */
 
@@ -1143,9 +1488,10 @@ function switchMode(mode){
   refSection.style.display = (mode === 'reference') ? 'block' : 'none';
   channels.style.display = (mode === 'reference') ? 'none' : 'flex';
 
-  if(mode === 'flashcards'){ renderCard(); }
-  else if(mode === 'quiz'){ startQuiz(); }
+  if(mode === 'flashcards'){ stopQuestionTimer(); renderCard(); }
+  else if(mode === 'quiz'){ renderPlayerBadge(); startQuiz(); }
   else if(mode === 'reference'){
+    stopQuestionTimer();
     document.getElementById('refSearch').value = '';
     renderReference('');
   }
@@ -1182,6 +1528,7 @@ document.addEventListener('keydown', (e) => {
 deck = refreshDeck(currentCategory);
 renderChannels();
 updateReviewToggleUI();
+renderPlayerBadge();
 renderCard();
 </script>
 </body>
